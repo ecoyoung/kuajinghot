@@ -18,6 +18,8 @@ export interface ModelSpec {
   extra?: Record<string, unknown>;
   /** Output tokens added to every call's own limit for a reasoning model, which reasons before it answers. */
   reasoningTokens?: number;
+  /** Minimum request timeout for a slow provider, in milliseconds. */
+  timeoutMs?: number;
   jsonMode: boolean;
   vision?: boolean;
 }
@@ -37,6 +39,15 @@ function reasoningTokensFromEnv(value: string | undefined): number | undefined {
   return Number(value);
 }
 
+function timeoutFromEnv(value: string | undefined): number | undefined {
+  if (!value) return undefined;
+  const ms = Number(value);
+  if (!/^\d+$/.test(value) || !Number.isSafeInteger(ms) || ms <= 0 || ms > 2_147_483_647) {
+    throw new Error("LLM_TIMEOUT_MS must be a positive integer up to 2147483647");
+  }
+  return ms;
+}
+
 export const MODELS: Record<string, ModelSpec> = {
   // Read from the environment at call time.
   default: {
@@ -44,6 +55,7 @@ export const MODELS: Record<string, ModelSpec> = {
     get model() { return process.env.LLM_MODEL ?? ""; },
     get extra() { return extraFromEnv(process.env.LLM_EXTRA_JSON); },
     get reasoningTokens() { return reasoningTokensFromEnv(process.env.LLM_REASONING_TOKENS); },
+    get timeoutMs() { return timeoutFromEnv(process.env.LLM_TIMEOUT_MS); },
     get jsonMode() { return process.env.LLM_JSON_MODE !== "false"; },
     get vision() { return process.env.LLM_VISION === "true"; },
   },
@@ -133,6 +145,7 @@ export async function chatJson<S extends z.ZodType>(opts: ChatJsonOptions<S>): P
   const baseUrl = credential("models", spec.baseUrlEnv);
   const apiKey = credential("models", spec.apiKeyEnv);
   if (!baseUrl || !apiKey || !spec.model) throw new Error(`Model ${opts.model} is not configured (${spec.baseUrlEnv}, ${spec.apiKeyEnv}${spec.key === "default" ? ", LLM_MODEL" : ""})`);
+  const timeoutMs = Math.max(opts.timeoutMs ?? 120_000, spec.timeoutMs ?? 0);
 
   const temperature = opts.temperature ?? 0.2;
   const maxTokens = Math.max(opts.maxTokens ?? 1500, 512) + (spec.reasoningTokens ?? 0);
@@ -169,7 +182,7 @@ export async function chatJson<S extends z.ZodType>(opts: ChatJsonOptions<S>): P
           method: "POST",
           headers: { "content-type": "application/json", authorization: `Bearer ${apiKey}` },
           body: JSON.stringify(body),
-          signal: AbortSignal.timeout(opts.timeoutMs ?? 120_000),
+          signal: AbortSignal.timeout(timeoutMs),
         });
       } catch (error) {
         if (isConnectFailure(error)) throw new ProviderRejectedError(`connect failed: ${String(error)}`, null, true);

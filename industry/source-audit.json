@@ -1,0 +1,285 @@
+{
+  "checkedAt": "2026-10-09",
+  "scope": "本地受保护采集，自动与模型安全阀关闭",
+  "sources": [
+    {
+      "id": "rss-ebay-news",
+      "name": "eBay 官方新闻",
+      "url": "https://www.ebayinc.com/stories/news/rss/",
+      "tier": "T1",
+      "enabled": true,
+      "result": {
+        "sourceId": "rss-ebay-news",
+        "status": "ok",
+        "found": 30,
+        "created": 8,
+        "revised": 0
+      }
+    },
+    {
+      "id": "rss-alizila",
+      "name": "Alizila · 阿里巴巴官方资讯",
+      "url": "https://www.alizila.com/feed/",
+      "tier": "T1",
+      "enabled": true,
+      "result": {
+        "sourceId": "rss-alizila",
+        "status": "ok",
+        "found": 10,
+        "created": 8,
+        "revised": 0
+      }
+    },
+    {
+      "id": "rss-pdd-investor",
+      "name": "PDD Holdings 投资者公告",
+      "url": "https://investor.pddholdings.com/rss/news-releases.xml",
+      "tier": "T1",
+      "enabled": false,
+      "result": {
+        "status": "deferred",
+        "reason": "网页与 RSS 内容可读取；本机受保护的代理请求反复超时/连接失败，暂不启用。"
+      }
+    },
+    {
+      "id": "rss-digital-commerce",
+      "name": "Digital Commerce 360",
+      "url": "https://www.digitalcommerce360.com/feed/",
+      "tier": "T2",
+      "enabled": true,
+      "result": {
+        "sourceId": "rss-digital-commerce",
+        "status": "ok",
+        "found": 10,
+        "created": 8,
+        "revised": 0
+      }
+    },
+    {
+      "id": "rss-practical-ecommerce",
+      "name": "Practical Ecommerce",
+      "url": "https://www.practicalecommerce.com/feed",
+      "tier": "T2",
+      "enabled": true,
+      "result": {
+        "sourceId": "rss-practical-ecommerce",
+        "status": "ok",
+        "found": 30,
+        "created": 8,
+        "revised": 0
+      }
+    },
+    {
+      "id": "web-amazon-seller-announcements",
+      "name": "Amazon 美国站卖家公告",
+      "url": "https://sell.amazon.com/blog/announcements",
+      "tier": "T1",
+      "enabled": false,
+      "result": {
+        "status": "deferred",
+        "reason": "公开 HTML 可解析 11 条并含日期；本机代理实抓返回 HTTP 200 但仅有 <!doctype html>，暂不启用。"
+      }
+    },
+    {
+      "id": "web-shopify-press",
+      "name": "Shopify 官方财报与新闻",
+      "url": "https://www.shopify.com/news/category/press-releases",
+      "tier": "T1",
+      "enabled": true,
+      "result": {
+        "sourceId": "web-shopify-press",
+        "status": "ok",
+        "found": 7,
+        "created": 7,
+        "revised": 0
+      }
+    },
+    {
+      "id": "rss-shopify-changelog",
+      "name": "Shopify 商家产品更新",
+      "url": "https://changelog.shopify.com/feed.xml",
+      "tier": "T1",
+      "enabled": true,
+      "result": {
+        "sourceId": "rss-shopify-changelog",
+        "status": "ok",
+        "found": 1609,
+        "created": 8,
+        "revised": 0
+      }
+    },
+    {
+      "id": "json-anker-news",
+      "name": "安克创新官方新闻与业绩",
+      "url": "https://www.anker.com.cn/posts",
+      "tier": "T1",
+      "enabled": false,
+      "result": {
+        "status": "deferred",
+        "reason": "官网内嵌 JSON 有 96 条新闻记录；本机 .cn 域名经 Fake-IP 解析，被私网保护阻止，暂不启用。"
+      }
+    },
+    {
+      "id": "web-shein-news",
+      "name": "SHEIN 集团官方新闻",
+      "url": "https://www.sheingroup.com/newsroom",
+      "tier": "T1",
+      "enabled": true,
+      "result": {
+        "sourceId": "web-shein-news",
+        "status": "ok",
+        "found": 124,
+        "created": 8,
+        "revised": 0
+      }
+    },
+    {
+      "id": "rss-ftc-releases",
+      "name": "美国 FTC 监管公告",
+      "url": "https://www.ftc.gov/feeds/press-release.xml",
+      "tier": "T1",
+      "enabled": true,
+      "result": {
+        "sourceId": "rss-ftc-releases",
+        "status": "ok",
+        "found": 10,
+        "created": 8,
+        "revised": 0
+      }
+    },
+    {
+      "id": "rss-cpsc-recalls",
+      "name": "美国 CPSC 产品召回",
+      "url": "https://www.cpsc.gov/Newsroom/CPSC-RSS-Feed/Recalls-RSS",
+      "tier": "T1",
+      "enabled": true,
+      "result": {
+        "sourceId": "rss-cpsc-recalls",
+        "status": "ok",
+        "found": 40,
+        "created": 8,
+        "revised": 0
+      }
+    },
+    {
+      "id": "rss-cpsc-news",
+      "name": "美国 CPSC 监管新闻",
+      "url": "https://www.cpsc.gov/Newsroom/CPSC-RSS-Feed/News-RSS",
+      "tier": "T1",
+      "enabled": false,
+      "result": {
+        "status": "deferred",
+        "reason": "RSS 可解析 50 条，但缺少发布日期；尚未核验可靠的详情日期规则，暂不启用。"
+      }
+    },
+    {
+      "id": "atom-hmrc",
+      "name": "英国 HMRC 税务与关务",
+      "url": "https://www.gov.uk/government/organisations/hm-revenue-customs.atom",
+      "tier": "T1",
+      "enabled": true,
+      "result": {
+        "sourceId": "atom-hmrc",
+        "status": "ok",
+        "found": 20,
+        "created": 8,
+        "revised": 0
+      }
+    },
+    {
+      "id": "atom-uk-dbt",
+      "name": "英国商业贸易部公告",
+      "url": "https://www.gov.uk/government/organisations/department-for-business-and-trade.atom",
+      "tier": "T1",
+      "enabled": true,
+      "result": {
+        "sourceId": "atom-uk-dbt",
+        "status": "ok",
+        "found": 20,
+        "created": 8,
+        "revised": 0
+      }
+    },
+    {
+      "id": "web-mofcom-policy",
+      "name": "中国商务部政策发布",
+      "url": "https://www.mofcom.gov.cn/zcfb/index.html",
+      "tier": "T1",
+      "enabled": false,
+      "result": {
+        "status": "deferred",
+        "reason": "公开列表可解析 8 条并含日期；本机 .cn 域名经 Fake-IP 解析，被私网保护阻止，暂不启用。"
+      }
+    },
+    {
+      "id": "web-cifnews",
+      "name": "雨果跨境 · 行业报道",
+      "url": "https://www.cifnews.com/",
+      "tier": "T2",
+      "enabled": true,
+      "result": {
+        "sourceId": "web-cifnews",
+        "status": "ok",
+        "found": 20,
+        "created": 8,
+        "revised": 0
+      }
+    },
+    {
+      "id": "rss-retail-dive",
+      "name": "Retail Dive · 零售业报道",
+      "url": "https://www.retaildive.com/feeds/news/",
+      "tier": "T2",
+      "enabled": true,
+      "result": {
+        "sourceId": "rss-retail-dive",
+        "status": "ok",
+        "found": 10,
+        "created": 8,
+        "revised": 0
+      }
+    },
+    {
+      "id": "json-sea-investor",
+      "name": "Sea / Shopee 投资者公告",
+      "url": "https://www.sea.com/api/invest/news?page=1&size=20",
+      "tier": "T1",
+      "enabled": true,
+      "result": {
+        "sourceId": "json-sea-investor",
+        "status": "ok",
+        "found": 20,
+        "created": 8,
+        "revised": 0
+      }
+    },
+    {
+      "id": "web-amazon-small-business",
+      "name": "Amazon 官方卖家与业务新闻",
+      "url": "https://www.aboutamazon.com/news/small-business",
+      "tier": "T1",
+      "enabled": true,
+      "result": {
+        "sourceId": "web-amazon-small-business",
+        "status": "ok",
+        "found": 11,
+        "created": 8,
+        "revised": 0
+      }
+    },
+    {
+      "id": "web-ecovacs-news",
+      "name": "科沃斯全球官方新闻",
+      "url": "https://www.ecovacs.com/global/newsroom/official-news",
+      "tier": "T1",
+      "enabled": true,
+      "result": {
+        "sourceId": "web-ecovacs-news",
+        "status": "ok",
+        "found": 11,
+        "created": 2,
+        "revised": 0
+      }
+    }
+  ]
+}
